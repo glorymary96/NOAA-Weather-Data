@@ -1,12 +1,8 @@
-import xarray as xr
 from ExtractData import get_data
 from PARAMS import LOG, GET_COUNTRIES, YEARS, FILES_DIR, clean_weather_db
 from Regions import regions
 import LoadData
 import xarray as xr
-import netCDF4
-import scipy
-
 
 if __name__=='__main__':
 
