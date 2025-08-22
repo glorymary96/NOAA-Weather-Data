@@ -1,0 +1,9 @@
+geopandas==1.0.1
+numpy==2.3.2
+pandas==2.3.2
+pyodbc==5.1.0
+pypika==0.48.9
+Requests==2.32.5
+Shapely==2.1.1
+SQLAlchemy==2.0.34
+xarray==2025.1.2
