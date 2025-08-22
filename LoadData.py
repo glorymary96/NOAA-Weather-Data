@@ -5,17 +5,8 @@ import queue
 import pandas as pd
 import sqlactions
 
-from PARAMS import CONN, FILES_DIR
-
 MULTI_ROW_INSERT_LIMIT = 1000
 WORKERS = 6
-
-TABLE_DEF = {"name": "weather",
-    "columns": {"ts": "DATETIME","date": "DATE","type": "VARCHAR(50)","location": "VARCHAR(50)",
-        "sub_location": "VARCHAR(50)","sub_sub_location": "VARCHAR(50)","crop": "VARCHAR(50)","value": "FLOAT",}}
-
-CONN_PARAMS = {"server": "localhost","database": "WeatherDB","DSN": "weather","port": 59252,
-    "driver": "ODBC Driver 17 for SQL Server",}
 
 def create_csv(list_of_df,csv_name):
     df = pd.concat(list_of_df)
@@ -33,14 +24,12 @@ def read_csv(csv_file):
         for row in reader:
             yield row
 
-
 def process_row(row,batch,table_def,conn_params):
     batch.put(row)
     if batch.full():
         sqlactions.multi_row_insert(batch,table_def,conn_params)
 
     return batch
-
 
 def load_csv(csv_file,table_def,conn_params):
     batch = queue.Queue(MULTI_ROW_INSERT_LIMIT)

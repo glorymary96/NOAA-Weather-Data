@@ -4,6 +4,8 @@ from Regions import regions
 import LoadData
 import xarray as xr
 
+from PARAMS import *
+
 if __name__=='__main__':
 
     # Loops over the countries to be included for analysis
@@ -34,7 +36,7 @@ if __name__=='__main__':
             LoadData.create_csv(dict_weather, FILES_DIR +'weather_data')
 
             # Load the data into MYSQL (local)
-            LoadData.load_csv(FILES_DIR + 'weather_data.csv', LoadData.TABLE_DEF, LoadData.CONN_PARAMS)
+            LoadData.load_csv(FILES_DIR + 'weather_data.csv', TABLE_DEF, CONN_PARAMS)
             LOG(' - Uploading the historical data')
 
     # Clean the database in case of dummy data, to keep the DB clean

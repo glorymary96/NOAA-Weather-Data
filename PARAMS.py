@@ -4,13 +4,20 @@ from sqlalchemy import create_engine
 from sqlalchemy import text
 
 
-WORKING_DIR = 'C:/Users/hp/PycharmProjects/WeatherData/'
+WORKING_DIR = './'
 
-FILES_DIR = 'C:/Users/hp/PycharmProjects/WeatherData/Files/'
+FILES_DIR = './Files/'
 
-GET_COUNTRIES = ['US']
+GET_COUNTRIES = ['US'] # Add countries
 
 DATE_NOW = dt.datetime.now()
+
+CONN_PARAMS = {"server": "localhost","database": "WeatherDB","DSN": "weather","port": 59252,
+    "driver": "ODBC Driver 17 for SQL Server",}
+
+TABLE_DEF = {"name": "weather",
+    "columns": {"ts": "DATETIME","date": "DATE","type": "VARCHAR(50)","location": "VARCHAR(50)",
+        "sub_location": "VARCHAR(50)","sub_sub_location": "VARCHAR(50)","crop": "VARCHAR(50)","value": "FLOAT",}}
 
 CONN = create_engine('mssql+pyodbc://@weather?TrustedConnection=True', connect_args={"timeout":120}).connect()
 
